@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="HandheldFriendly" content="true">
+    <meta http-equiv="Cache-Control" content="no-siteapp" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no, email=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-tap-highlight" content="no">
+    <title>明细列表</title>
+    <link rel="stylesheet" href="css/style.css?v=1">
+    <link rel="stylesheet" href="css/base.min.css">
+    <link rel="stylesheet" href="css/plugin.min.css">
+  </head>
+  <body class="bg-white">
+    <div id="userCenter" class="display-none">     
+      <div class="user-head">
+        <img src="images/logo3.png" class="center-photo"/>
+      </div>
+      <div id="userCenterWrapper">
+        <div class="mt-md">
+          <label class="common-lable">
+          <span>账号</span>
+          ：</label>
+          <input id="memberAccount" type="text" data-valid="notnull" placeholder="账号" disabled="disabled"/>
+        </div>
+        <form id="userCenterForm">
+          <div class="mt-md">
+            <label class="common-lable">
+            <span>密码</span>
+            <span class="notice-mark">*</span>：</label>
+            <input class="common-input" type="password" data-name="password" data-valid="notnull" id="passWord" placeholder="密码" disabled="disabled"/>
+          </div>
+          <div class="mt-md">
+            <label class="common-lable">
+            <span>姓名</span>
+            ：</label>
+            <input class="common-input" type="text" data-name="membername"  placeholder="姓名" disabled="disabled"/>
+          </div>
+          <div class="position-relative">
+            <div class="disabled-div display-none" id="disabledDiv"></div>
+            <div class="mt-md">
+              <label class="common-lable">
+              <span>出生年月</span>
+              ：</label>
+              <input class="common-input" type="text" data-name="memberbir" id="memberBir" data-valid="datetime" placeholder="出生年月" disabled="disabled"/>
+            </div>
+          </div>
+          <div class="mt-md">
+            <label class="common-lable">
+              <span>性别</span>
+            ：</label>
+            <span class="ml-lg">
+              <label class="sex-select" for="female">女</label>
+              <input class="radio-select" type="radio" name="membersex" id="female" disabled="disabled" onClick="changeSex('0')"/>
+              <label class="sex-select" for="male">男</label>
+              <input class="radio-select" type="radio" name="membersex" id="male" disabled="disabled" onClick="changeSex('1')"/>
+              <input type="text" data-name="membersex" id="memberSex" class="display-none"/>
+            </span>
+          </div>
+          <div class="mt-md">
+            <label class="common-lable">
+            <span>电话</span>
+            ：</label>
+            <input class="common-input" type="text" data-name="membertele" data-valid="phone" placeholder="电话" disabled="disabled"/>
+          </div>
+          <div class="mt-md mb-md">
+            <label class="common-lable">
+            <span>密保问题</span>
+            ：</label>
+            <input class="common-input" type="text" data-name="question" placeholder="密保问题" disabled="disabled"/>
+          </div>
+          <div class="mt-md mb-md">
+            <label class="common-lable">
+            <span>密保答案</span>
+            ：</label>
+            <input class="common-input" type="text" data-name="answer" placeholder="密保答案" disabled="disabled"/>
+          </div>
+        </form>
+        <div class="edit-button" id="editBtn" onclick="editInfo()">编辑</div>
+        <div class="edit-button display-none" id="finishBtn" onClick="updateUserData()">完成</div>
+      </div>
+    </div> 
+    <!-- 以下为详细内容 -->
+    <div class="head-wrapper">
+      <div class="head-inside div-center text-center">
+        <img src="images/logo3.png" class="height-full"/>
+        <span class="page-title">明细列表</span>
+        <a href="adddetail.html"><span class="glyphicon glyphicon-plus add-button"></span></a>
+        <span class="user-photo glyphicon glyphicon-user" onclick="showCenterPage()"></span>
+      </div>
+    </div>  
+    <div class="swiper-container" id="swiperPagesIndex">
+      <div class="swiper-scrollbar">
+        <div class="swiper-scrollbar-drag swiper-scrollbar-cursor-drag"></div>
+      </div>
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="month-total">
+            <div class="month-income">
+              <span class="circle-radius bg-green income-logo"></span>
+              <span class="text-green">本月总收入</span>
+              <span id="income">0</span>
+            </div>
+            <div class="month-pay">
+              <span class="pay-logo bg-theme"></span>
+              <span class="theme-color">本月总支出</span>
+              <span id="pay">0</span>
+            </div>
+          </div>
+          <div class="division-bar"></div>
+          <div class="list-head">
+            <div class="list-title">收支明细排序类型选择<span class="vertical-bar float-right bg-gray"></span></div>
+            <div class="list-type-wrapper">
+              <span class="list-type" onClick="selectType(this)">
+                <span>按时间</span>
+                <span class="glyphicon glyphicon-chevron-down list-type-arrow"></span>
+              </span>
+              <div class="list-type-select">
+                <div class="text-center" onClick="sTypeValIndex(this)">按时间</div>
+                <div class="text-center border-top-ddd" onClick="sTypeValIndex(this)">按金额</div>
+              </div>
+              <!--<div id="inquiryType">
+                <option value="">按时间</option>
+                <option value="">按金额</option>
+                <option value="">取消</option>
+              </div>-->
+            </div>
+          </div>
+          <div id="detailInfo">
+            <div class="swiper-container" id="detailSwiper">
+              <div class="swiper-scrollbar">
+                <div class="swiper-scrollbar-drag swiper-scrollbar-cursor-drag"></div>
+              </div>
+              <div class="swiper-wrapper width-full">
+                <div class="swiper-slide width-full" id="detailDiv">
+                 
+                </div> 
+              </div>
+            </div>  
+          </div>     
+        </div>     
+      </div>
+    </div>
+    <div id="footer">
+      <a href="#">
+        <div class="footer-item">
+          <div class="div-center text-center footer-content mt-xs">
+            <img src="images/mingxi2.png"/>
+            <div class="footer-text theme-color">收支明细</div>
+          </div>
+        </div>
+      </a>
+      <a href="budget.html">
+        <div class="footer-item">
+          <div class="div-center text-center footer-content mt-xs">
+            <img src="images/yusuan.png" />
+            <div class="footer-text">收支预算</div>
+          </div>
+        </div>
+      </a>
+      <a href="analysis.html">
+        <div class="footer-item">
+          <div class="div-center text-center footer-content mt-xs">
+            <img src="images/search.png"/>
+            <div class="footer-text">搜索分析</div>
+          </div>
+        </div>
+      </a>
+      <a href="manage.html">
+        <div class="footer-item">
+          <div class="div-center text-center footer-content mt-xs">
+            <img src="images/guanli.png"/>
+            <div class="footer-text">管理维护</div>
+          </div>
+        </div>
+      </a>
+    </div>
+    
+    <div class="cover-div display-none" onClick="closeCenterPage()"></div>
+    <script src="js/plugin.min.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/HighCharts/highcharts.js" type="text/javascript"></script>
+    <script src="js/HighCharts/highcharts-3d.js" type="text/javascript"></script>
+    <script src="js/HighCharts/highcharts-3d.src.js" type="text/javascript"></script>
+    <!-- 添加主题样式js文件 -->  
+    <script src="js/HighCharts/themes/grid.js" type="text/javascript"></script>
+    <!--添加导出模式 -->  
+    <script src="js/HighCharts/modules/exporting.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+      var detail1=[{"incometypeid":"","detailid":"1","detailmark":"东一","adress":"食堂","consumename":"自己","memberaccount":"","detailmoney":"8.6","detailname":"午餐","detailszclassify":"0","timepoint":"2016-01","paytypeid":"2"},
+      {"incometypeid":"1","detailid":"2","detailmark":"微创","adress":"公司","consumename":"自己","memberaccount":"","detailmoney":"2600","detailname":"工资薪水","detailszclassify":"0","timepoint":"2016-02","paytypeid":""},
+      {"incometypeid":"1","detailid":"3","detailmark":"亲戚","adress":"家","consumename":"孩子","memberaccount":"","detailmoney":"100","detailname":"红包","detailszclassify":"1","timepoint":"2016-03","paytypeid":""},
+      {"incometypeid":"","detailid":"4","detailmark":"","adress":"地铁站门口","consumename":"父母","memberaccount":"","detailmoney":"18","detailname":"打车","detailszclassify":"0","timepoint":"2016-04","paytypeid":"10"},
+      {"incometypeid":"1","detailid":"5","detailmark":"亲戚","adress":"家","consumename":"孩子","memberaccount":"","detailmoney":"100","detailname":"红包","detailszclassify":"0","timepoint":"2016-03","paytypeid":""},
+      {"incometypeid":"1","detailid":"6","detailmark":"","adress":"地铁站门口","consumename":"父母","memberaccount":"","detailmoney":"18","detailname":"打车","detailszclassify":"0","timepoint":"2016-04","paytypeid":"10"}];
+      
+      var flag = true;
+      var detail;
+      $(function(){
+        detail = postData("timeShowDetail");
+        initHeight();
+        showDetail(detail);
+        bindUserData();
+        nowMonthAllSZ();
+      });
+      function nowMonthAllSZ(){
+        var time = formatDate("noDay");
+        var nowMonthAllIn = postData("nowMonthAllIn",time)[0].inMoney;
+        var nowMonthAllPay = postData("nowMonthAllPay",time)[0].payMoney;
+        $("#income").text(nowMonthAllIn);
+        $("#pay").text(nowMonthAllPay);
+      }
+      function showDetail(detail){
+        $("#detailDiv").empty();
+        showDataList("detailDiv",detail,type_detail);
+        initSwiper("detailSwiper");
+      }
+      function initHeight(){
+        var swiperInitHeight = parseInt(winHeight) - headHeight - footerHeight - 96;
+        $("#swiperPagesIndex").css("height",swiperPageHeight+"px");
+        $("#detailInfo").css("height",swiperInitHeight+"px");
+        $("#userCenterWrapper").css("height",(winHeight-110)+"px");
+      }
+      // 明细--选择改变，更新明细
+      function sTypeValIndex(obj){
+        selectTypeVal(obj);
+        var objText = $(obj).text();
+        if(objText=="按时间"){
+          detail = postData("timeShowDetail");
+          showDetail(detail);
+        }else{
+          detail = postData("moneyShowDetail");
+          showDetail(detail);
+        }
+        //
+      }
+    </script>
+  </body>
+</html>

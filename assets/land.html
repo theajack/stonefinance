@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="zh-Hans" class="bg-white" >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="HandheldFriendly" content="true">
+    <meta http-equiv="Cache-Control" content="no-siteapp" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no, email=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-tap-highlight" content="no">
+    <title></title>
+    <link rel="stylesheet" href="css/style.css?v=1">
+    <link rel="stylesheet" href="css/base.min.css">
+    <link rel="stylesheet" href="css/plugin.min.css">
+  </head>
+  <body class="bg-white">
+    <div class="land-head">
+      <img src="images/landhead.png" id="landHeadImg" />
+    </div>
+    <form id="land">
+      <div class="land-wrapper clearfix border-top-ddd">
+        <div class="land-logo">
+          <img src="images/account.png" class="land-img"/>
+        </div>      
+        <input type="text" class="land-text" data-name="memberaccount" placeholder="账号"/>
+      </div> 
+      <div class="land-wrapper clearfix">
+        <div class="land-logo">
+          <img src="images/passwd.png" class="land-img"/>
+        </div>      
+        <input type="password" class="land-text" data-name="password" placeholder="密码"/>
+      </div>
+      <span class="glyphicon glyphicon-eye-close passwd-eye" onClick="changePWType(this)"></span>
+    </form>
+    <div class="check-box-wrapper clearfix">
+      <input class="pull-left" type="checkbox" id="rememberMe" onclick="checkRemember()"><span class="check-box-text pull-left">记住账号密码</span></input>
+      <span class="check-box-text pull-right">自动登录</span>
+      <input class="pull-right" type="checkbox" id="autoLoginBox" onclick="checkAuto()"></input>
+    </div>
+    <div class="edit-button" onClick="land()">登录</div>
+
+    <div class="pl-lg pr-lg pt-sm">
+      <span class="text-orange float-left" onClick="forgetFWBtn()">忘记密码?</span>
+      <span class="glyphicon glyphicon-chevron-right float-right register-btn"></span>
+      <span class="float-right text-orange" onClick="registNewUser()">注册新用户</span>
+    </div>
+    <!-- 注册页面   -->
+    <div id="registerWrapper" class="hidden-wrapper display-none">
+      <span class="glyphicon glyphicon-chevron-left return-arrow" onClick="pullHidden('registerWrapper')"></span>
+      <div class="user-head">
+        <img src="images/logo3.png" class="center-photo"/>
+      </div>
+      <form id="registForm">
+        <div class="mt-md">
+          <label class="common-lable">
+          <span>账号</span>
+          <span class="notice-mark">*</span>：</label>
+          <input class="common-input bg-eee" type="text" data-name="memberaccount" id="memberaccount" data-valid="notnull" placeholder="账号"/>
+        </div>
+        <div class="mt-md">
+          <label class="common-lable">
+          <span>密码</span>
+          <span class="notice-mark">*</span>：</label>
+          <input class="common-input bg-eee" type="password" data-name="password" data-valid="notnull" id="passWord" placeholder="密码"/>
+        </div>
+        <div class="mt-md">
+          <label class="common-lable">
+          <span>再次输入</span>
+          <span class="notice-mark">*</span>：</label>
+          <input class="common-input bg-eee" type="password" data-valid="notnull" id="pWAgain" placeholder="再次输入密码"/>
+        </div>
+        <div class="mt-md">
+          <label class="common-lable">
+          <span>真实姓名</span>
+          ：</label>
+          <input class="common-input bg-eee" type="text" data-name="membername" placeholder="真实姓名"/>
+        </div>
+
+        <div class="mt-md">
+          <label class="common-lable">
+          <span>出生年月</span>
+          <span class="notice-mark">*</span>：</label>
+          <input class="common-input bg-eee" type="text" data-name="memberbir" id="memberBir" data-valid="datetime" placeholder="出生年月"/>
+        </div>
+        <div class="mt-md">
+          <label class="common-lable">
+            <span>性别</span>
+          ：</label>
+          <span class="ml-lg">
+            <label data-name="membersex" value="男" class="display-none"></label>
+            <label class="sex-select" checked="true">女</label>
+            <input class="radio-select" type="radio" name="sex" onClick="changeSexVal('女')"/>
+            <label class="sex-select">男</label>
+            <input class="radio-select" type="radio" name="sex" onClick="changeSexVal('男')"/>
+          </span>
+        </div>
+        <div class="mt-md">
+          <label class="common-lable">
+          <span>联系方式</span>
+          ：</label>
+          <input class="common-input bg-eee" type="text" data-name="membertele" data-valid="phone" placeholder="联系方式"/>
+        </div>
+      </form>
+      <div class="edit-button" onClick="regist()">
+        注册
+      </div>
+      <div class="text-orange float-right pr-lg pb-md" onClick="setData('请设置问题答案：')">设置密保问题</div>   
+    </div>
+    <form  id="findPWWrapper" class="display-none hidden-wrapper">
+      <div class="head-wrapper">
+        <span class="glyphicon glyphicon-chevron-left return-logo" onClick="pullHidden('findPWWrapper')"></span>
+        <div class="head-inside div-center text-center">
+          <img src="images/logo3.png" class="height-full"/>
+          <span class="page-title">找回密码</span>
+        </div>
+      </div>
+      <div class="mark-text">请在下面输入您要找回的账号：</div>
+      <div class="land-wrapper clearfix border-top-ddd">
+        <div class="land-logo">
+          <img src="images/account.png" class="land-img"/>
+        </div>      
+        <input type="text" class="land-text" data-name="memberaccount" placeholder="账号"/>
+      </div>
+      <div class="display-none" id="findPW">
+        <div class="mark-text">请回答您设置的问题：</div>
+        <div class="land-wrapper clearfix">
+          <div class="land-logo">
+            <img src="images/question.png" class="land-img"/>
+          </div>      
+          <input type="text" class="land-text disabled-input" disabled="disabled"/>
+        </div>
+        <div class="land-wrapper clearfix">
+          <div class="land-logo">
+            <img src="images/answer.png" class="land-img"/>
+          </div>
+          <input type="text" class="land-text" placeholder="请填写答案"/>
+        </div>
+      </div>
+      <div class="edit-button mt-xlg" id="nextBtn" onClick="showFindPW()">下一步</div>
+    </form>
+    <script src="js/plugin.min.js"></script>
+    <script src="js/common.js"></script>
+    <script type="text/javascript">
+    var password = "";
+    var loginState={};
+    var isForDev=false;
+    //var loginState={      "isRememberMe":"true",      "isPlayBgm":"false",      "password":"22"
+    $(function(){
+      if(isForDev){
+        var data={
+          "answer":"test",
+          "memberaccount":"test",
+          "memberbir":"2016-10-27",
+          "membername":"test",
+          "membersex":"男",
+          "membertele":"12345678910",
+          "password":"test",
+          "question":"test"
+        };
+        postData("regist",data);
+        setFormVal("land",{
+          "memberaccount":data.memberaccount,
+          "password":data.password
+        });
+        land(true);
+      }else{
+        loginState=postData("getLoginState");
+        //var data='{{"passward":"1","account":"1","isPlayBgm":"1","isAutoLogin":"1","isRememberMe":"1"}}';
+        
+        var isAuto=getUrlPara();
+        
+          if(loginState.isAutoLogin=="true"){
+            
+            $("#rememberMe")[0].checked=true;
+            $("#autoLoginBox")[0].checked=true;
+            writeLoginForm(loginState);
+            if(!isAuto){
+              mesShow("自动登录中...","success",600);
+              land(true);
+            }
+          }else{
+            bindDate("memberBir");
+            if(loginState.isRememberMe=="true"){
+              $("#rememberMe")[0].checked=true;
+              writeLoginForm(loginState);
+            }
+          }
+      }
+    })
+    function writeLoginForm(data){
+      setFormVal("land",{
+        "memberaccount":data.account,
+        "password":data.password
+      });
+    }
+    function land(isAuto){
+      var data=getFormVal("land");
+      //  memberaccount记录当前账号
+      var memberaccount = data["memberaccount"];
+      var password = data["password"];
+      if(memberaccount==""){
+        mesShow("账号不能为空，请填写账号","warn",600);
+      }else{
+        if(password==""){
+          mesShow("密码不能为空，请填写密码","warn",600);
+        }else{
+          var result = postData("land",data);
+        //  var result = true;
+          if(result==true){
+            window.location.href="index.html";
+            if(isAuto){
+            }else{
+              mesShow("登录成功","success",600);
+              checkRemember();
+              checkAuto();
+            }
+          }else{
+            mesShow("账号或密码不正确，请重新登录","error",600);
+            $($("#land").find("[data-name]")[1]).val("");
+          }
+        }
+      }
+      playBtnClick();
+    }
+    function registNewUser(){
+      pullHidden('registerWrapper');
+      var $regisFormDiv = $("#registForm").find("input");
+      $regisFormDiv.val("");
+      $($regisFormDiv[0]).removeClass("border-theme");
+      $($regisFormDiv[1]).removeClass("border-theme");
+      $($regisFormDiv[2]).removeClass("border-theme");
+    }
+    function forgetFWBtn(){
+      $("#findPW").slideUp("slow");
+      $($("#findPWWrapper").find("input")).val("");
+      pullHidden('findPWWrapper');
+      $("#nextBtn").text("下一步");
+    }
+    function showFindPW(){
+      if($("#nextBtn").text()=="下一步"){
+        var data = getFormVal("findPWWrapper"); 
+        if(data!=""){
+          var result = postData("findPW",data);
+        //   var  memberInfo={"password":"123","question":"伤森","answer":"",};
+        //   var result = "true";
+          if(result!=false){
+          //  var memberInfo = $.parseJSON(result);
+            var question = result.question;
+            var answer = result.answer;
+                password = result.password;
+            if(question!=""){
+              $($("#findPWWrapper").find("input")[1]).val(question);
+              $($("#findPWWrapper").find("input")[2]).attr("data-answer",answer);
+              $("#findPW").slideDown("slow");
+              $("#nextBtn").text("提交");
+            }else{
+              mesShow("该账号未设置密保问题","warn");
+            }
+          }else{
+            mesShow("此帐号不存在，请重新填入账号","warn");
+            $($("#findPWWrapper").find("input")[0]).val("");
+          }
+        }else{
+          mesShow("账号不能为空，请填写账号","warn");
+        }
+      }else{
+        var anw = $($("#findPWWrapper").find("input")[2]).val();
+        var answer = $($("#findPWWrapper").find("input")[2]).attr("data-answer");
+        if(anw!=answer){
+          mesShow("答案错误，请重新填写","error");
+          $($("#findPWWrapper").find("input")[2]).val("");
+        }else{
+          mesShow("答案正确,即将返回登陆页面。","success",600);
+          pullHidden('findPWWrapper');
+          $($("#land").find("input")[1]).val(password);
+        }
+      }
+      playBtnClick();
+    }
+    function regist(){
+      var account = $("#memberaccount").val();
+      var passWord = $("#passWord").val();
+      var pWAgain = $("#pWAgain").val();
+      if(account==""){
+        mesShow("账号不能为空，请填写账号","warn",600);
+        $("#memberaccount").addClass("border-theme");
+      }else{
+        if(passWord==""){
+          mesShow("密码不能为空，请填写密码","warn",600);
+          $("#passWord").addClass("border-theme");
+        }else{
+          if(passWord!=pWAgain){
+            mesShow("两次输入的密码不相同，请重新填写密码","warn",600);
+            $("#pWAgain").addClass("border-theme").val("");
+            $("#passWord").val("");
+          }else{
+            $("#pWAgain").removeClass("border-theme");
+            $("#memberaccount").removeClass("border-theme");
+            $("#passWord").removeClass("border-theme");
+            var data=getFormVal("registForm");
+            data["question"]=boxData1;
+            data["answer"]=boxData2;
+            clearBoxData();
+            var result = postData("regist",data);
+            if(result==true){
+              mesShow("注册成功,请重新登录","success",600);
+              pullHidden('registerWrapper');
+            }else{
+              mesShow("此帐户已注册,请重新注册","error",600);
+              $("#memberaccount").val("");
+            }
+          }
+        }
+      }
+      playBtnClick();
+    }
+    function changeSexVal(sex){
+      $("#registForm").find("[data-name=membersex]").val(sex);
+    }
+    function changePWType(obj){
+      var passwdType = $($("#land").find("input")[1]).attr("type");
+      var $passwdEye = $(obj);
+      if(passwdType=="password"){
+        $($("#land").find("input")[1]).attr("type","text");
+        $passwdEye.addClass("glyphicon-eye-open").removeClass("glyphicon-eye-close");
+      }else{
+        $($("#land").find("input")[1]).attr("type","password");
+        $passwdEye.addClass("glyphicon-eye-close").removeClass("glyphicon-eye-open");
+      }
+    }
+    function checkRemember(){
+      if($("#rememberMe")[0].checked==true){
+        loginState["isRememberMe"]="true";
+        var data=getFormVal("land");
+        loginState["account"]=data.memberaccount;
+        loginState["password"]=data.password;
+      }else{
+        loginState["isRememberMe"]="false";
+        loginState["account"]=" ";
+        loginState["password"]=" ";
+      }
+      postData("saveLoginState",loginState);
+    }
+    function checkAuto(){
+      if($("#autoLoginBox")[0].checked==true){
+        $("#rememberMe")[0].checked=true;
+        loginState["isRememberMe"]="true";
+        loginState["isAutoLogin"]="true";
+        var data=getFormVal("land");
+        loginState["account"]=data.memberaccount;
+        loginState["password"]=data.password;
+      }else{
+        loginState["isAutoLogin"]="false";
+      }
+      postData("saveLoginState",loginState);
+    }
+    
+    </script>
+  </body>
+</html>

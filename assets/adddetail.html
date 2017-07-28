@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="HandheldFriendly" content="true">
+    <meta http-equiv="Cache-Control" content="no-siteapp" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no, email=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-tap-highlight" content="no">
+    <title></title>
+    <link rel="stylesheet" href="css/style.css?v=1">
+    <link rel="stylesheet" href="css/base.min.css">
+    <link rel="stylesheet" href="css/plugin.min.css">
+  </head>
+  <body class="bg-white">
+    <div class="head-wrapper">
+      <a href="javascript:history.go(-1);">
+        <span class="glyphicon glyphicon-chevron-left return-logo"></span>
+      </a>
+      <div class="head-inside div-center text-center">
+        <img src="images/logo3.png" class="height-full"/>
+        <span class="page-title">收支明细</span>
+      </div>
+      <span class="glyphicon glyphicon-ok tick-mark" onClick="saveDetail('payForm','jump')"></span>
+    </div>
+    <div class="swiper-nav swiper-container">
+      <div class="swiper-wrapper sz-wrapper">
+        <div class="swiper-slide sz-type active">支出</div>
+        <div class="swiper-slide sz-type" >收入</div>
+      </div>
+    </div>
+    <div class="swiper-page swiper-container" id="swiperPagesDetail">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <form id="payForm">
+            <div class="land-wrapper clearfix">
+              <div class="land-logo">
+                <img src="images/money.png" class="land-img"/>
+              </div>      
+              <input type="text" class="land-text sz-money sz-focus theme-color" data-name="detailmoney" id="payNum"  value="0.00" readonly="true" onClick="showNumPage('payNumScreen')"/>
+            </div>
+            <div class="land-wrapper clearfix">
+              <div class="land-logo">
+                <span class="glyphicon glyphicon-th-list boot-font"></span>
+              </div>      
+              <input type="text" class="land-text sz-focus" value="午餐" data-name="detailname" data-value="1" readonly="true" id="payType" placeholder="收支类型" onClick="showPayType()"/>
+            </div>
+            <div class="land-wrapper clearfix">
+              <div class="land-logo">
+                <span class="glyphicon glyphicon-user boot-font"></span>
+              </div>      
+              <input type="text" class="land-text sz-focus" data-name="consumename" id="payConsume" value="自己" placeholder="支出成员" readonly="true"  onClick="showPayConsume()"/>
+            </div>
+            <div class="land-wrapper clearfix">
+              <div class="land-logo">
+                <img src="images/address.png" class="land-img"/>
+              </div>      
+              <input type="text" class="land-text" data-name="adress" placeholder="支出地点"/>
+            </div>
+            <div class="land-wrapper clearfix">
+              <div class="land-logo">
+                <span class="glyphicon glyphicon-time boot-font"></span>
+              </div>      
+              <input type="text" class="land-text" id="payTime" data-name="timepoint" placeholder="支出时间"/>
+            </div>
+            <div class="land-wrapper clearfix">
+              <div class="land-logo">
+                <span class="glyphicon glyphicon-file boot-font"></span>
+              </div>      
+              <input type="text" class="land-text" data-name="detailmark" placeholder="备注..."/>
+            </div>
+          </form>
+          
+          <div class="entry-screen" id="payNumScreen">
+            <div class="entry-left">
+              <div class="sz-common sz-num" onClick="changeNum('1','payNum')">1</div>
+              <div class="sz-common sz-num" onClick="changeNum('2','payNum')">2</div>
+              <div class="sz-common sz-num" onClick="changeNum('3','payNum')">3</div>
+              <div class="sz-common sz-num" onClick="changeNum('4','payNum')">4</div>
+              <div class="sz-common sz-num" onClick="changeNum('5','payNum')">5</div>
+              <div class="sz-common sz-num" onClick="changeNum('6','payNum')">6</div>
+              <div class="sz-common sz-num" onClick="changeNum('7','payNum')">7</div>
+              <div class="sz-common sz-num" onClick="changeNum('8','payNum')">8</div>
+              <div class="sz-common sz-num" onClick="changeNum('9','payNum')">9</div>
+              <div class="sz-common sz-num" onClick="changeNum('.','payNum')">.</div>
+              <div class="sz-common sz-num" onClick="changeNum('0','payNum')">0</div>
+              <img class="sz-common sz-num" src="images/del.png" onClick="delNum('payNum')"/>
+            </div>
+            <div class="entry-right">
+              <div class="sz-common sz-operation glyphicon glyphicon-ok" onClick="closeNumPage('payNumScreen')"></div>
+              <div class="sz-common sz-operation glyphicon glyphicon-remove bottom" onClick="delAllNum('payNum')"></div>
+            </div>
+          </div>
+          <div class="text-center mt-xlg">
+            <div class="edit-button save-button" onclick="saveDetail('payForm','jump')">保存</div>
+            <div class="edit-button save-button" onclick="saveDetailWrite('payForm')">再录一笔</div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <form id="inForm">
+            <div class="land-wrapper clearfix">
+              <div class="land-logo">
+                <img src="images/money.png" class="land-img"/>
+              </div>      
+              <input type="text" class="land-text text-green sz-money sz-focus" id="inNum" data-name="detailmoney" value="0.00" readonly="true" onClick="showNumPage('inNumScreen')"/>
+            </div>
+            <div class="land-wrapper clearfix">
+              <div class="land-logo">
+                <span class="glyphicon glyphicon-th-list boot-font"></span>
+              </div>      
+              <input type="text" class="land-text sz-focus" value="工资薪水" data-name="detailname" data-value="1" readonly="true" id="inType"  onClick="showIncomeType()"/>
+            </div>
+            <div class="land-wrapper clearfix">
+              <div class="land-logo">
+                <span class="glyphicon glyphicon-user boot-font"></span>
+              </div>      
+              <input type="text" class="land-text sz-focus" id="inConsume" data-name="consumename" value="自己" placeholder="收入成员" readonly="true" onClick="showInConsume()"/>
+            </div>
+            <div class="land-wrapper clearfix">
+              <div class="land-logo">
+                <img src="images/address.png" class="land-img"/>
+              </div>      
+              <input type="text" class="land-text" data-name="adress" placeholder="收入地点"/>
+            </div>
+            <div class="land-wrapper clearfix">
+              <div class="land-logo">
+                <span class="glyphicon glyphicon-time boot-font"></span>
+              </div>      
+              <input type="text" id="incomeTime" class="land-text" data-name="timepoint" placeholder="收入时间"/>
+            </div>
+            <div class="land-wrapper clearfix">
+              <div class="land-logo">
+                <span class="glyphicon glyphicon-file boot-font"></span>
+              </div>      
+              <input type="text" class="land-text" data-name="detailmark" placeholder="备注..."/>
+            </div>
+          </form>
+          <div class="entry-screen" id="inNumScreen">
+            <div class="entry-left">
+              <div class="sz-common sz-num" onClick="changeNum('1','inNum')">1</div>
+              <div class="sz-common sz-num" onClick="changeNum('2','inNum')">2</div>
+              <div class="sz-common sz-num" onClick="changeNum('3','inNum')">3</div>
+              <div class="sz-common sz-num" onClick="changeNum('4','inNum')">4</div>
+              <div class="sz-common sz-num" onClick="changeNum('5','inNum')">5</div>
+              <div class="sz-common sz-num" onClick="changeNum('6','inNum')">6</div>
+              <div class="sz-common sz-num" onClick="changeNum('7','inNum')">7</div>
+              <div class="sz-common sz-num" onClick="changeNum('8','inNum')">8</div>
+              <div class="sz-common sz-num" onClick="changeNum('9','inNum')">9</div>
+              <div class="sz-common sz-num" onClick="changeNum('.','inNum')">.</div>
+              <div class="sz-common sz-num" onClick="changeNum('0','inNum')">0</div>
+              <img class="sz-common sz-num" src="images/del.png" onClick="delNum('inNum')"/>
+            </div>
+            <div class="entry-right">
+              <div class="sz-common sz-operation glyphicon glyphicon-ok" onClick="closeNumPage('inNumScreen')"></div>
+              <div class="sz-common sz-operation glyphicon glyphicon-remove bottom" onClick="delAllNum('inNum')"></div>
+            </div>
+          </div>
+          <div class="text-center mt-xlg">
+            <div class="edit-button save-button" onclick="saveDetail('inForm','jump')">保存</div>
+            <div class="edit-button save-button" onclick="saveDetailWrite('inForm')">再录一笔</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="sztype-content display-none" id="itemPayWrapper" data-aim="payType">
+      <div class="content-wrapper">
+        <div class="content-head">支出大类</div>
+        <span class="glyphicon glyphicon-remove close-btn" onClick="closePage(this)"></span>
+        <div class="swiper-container" id="swiperPayType">
+          <div class="swiper-wrapper width-full">
+            <div class="swiper-slide width-full">
+              <div id="payTypeContent" class="width-full">
+
+              </div>
+            </div>
+          </div>  
+        </div>
+      </div>
+    </div>
+    <div class="sztype-content display-none" id="itemIncomeWrapper" data-aim="inType">
+      <div class="content-wrapper">
+        <div class="content-head">收入大类</div>
+        <span class="glyphicon glyphicon-remove close-btn" onClick="closePage(this)"></span>
+        <div class="swiper-container" id="swiperIncomeType">
+          <div class="swiper-wrapper width-full">
+            <div class="swiper-slide width-full">
+              <div id="incomeTypeContent" class="width-full">
+
+              </div>
+            </div>
+          </div>  
+        </div>
+      </div>
+    </div>
+    
+    <div class="sztype-content display-none" id="consumePayWrapper" data-aim="payConsume">
+      <div class="content-wrapper">
+        <div class="content-head">消费成员</div>
+        <span class="glyphicon glyphicon-remove close-btn" onClick="closePage(this)"></span>
+        <div class="swiper-container" id="swiperPayConsume">
+          <div class="swiper-wrapper width-full">
+            <div class="swiper-slide width-full">
+              <div id="payConsumeContent" class="width-full">
+
+              </div>
+            </div>
+          </div>  
+        </div>
+      </div>
+    </div>
+    
+    <div class="sztype-content display-none" id="consumeInWrapper" data-aim="inConsume">
+      <div class="content-wrapper">
+        <div class="content-head">收入成员</div>
+        <span class="glyphicon glyphicon-remove close-btn" onClick="closePage(this)"></span>
+        <div class="swiper-container" id="swiperInConsume">
+          <div class="swiper-wrapper width-full">
+            <div class="swiper-slide width-full">
+              <div id="inConsumeContent" class="width-full">
+
+              </div>
+            </div>
+          </div>  
+        </div>
+      </div>
+    </div>
+    
+    <script src="js/plugin.min.js"></script>
+    <script src="js/common.js"></script>
+    <script type="text/javascript">
+      var isIncomeFirst = true,
+          isPayFirst = true,
+          isInConsumeFirst = true,
+          isPayConsumeFirst = true;
+      $(function(){
+        initAll();
+        bindDate("payTime");
+        $("#payTime").val(formatDate());
+        bindDate("incomeTime");
+        $("#incomeTime").val(formatDate());
+      });
+      function initAll(){
+        var typeHeight = winHeight*0.86 - 36;
+        $("#swiperPayType").css("height",typeHeight+"px");
+        $("#swiperIncomeType").css("height",typeHeight+"px");
+        $("#swiperPayConsume").css("height",typeHeight+"px");
+        $("#swiperInConsume").css("height",typeHeight+"px");
+        var initPageHigh = winHeight - 96;
+        $(".swiper-page").css("height",initPageHigh+"px");
+        initPageSwiper("swiperPagesDetail",0,type_adddetail);
+        initNavSwiper("swiper-nav");
+      }
+      
+      function showPayType(){
+        if(isPayFirst){
+          var bigtype = postData("showBigPayType");
+          /*  var bigtype=[{"bigpaytypeid":"1","bigpaytypename":"餐饮 "},
+          {"bigpaytypeid":"2","bigpaytypename":"交通"},
+          {"bigpaytypeid":"3","bigpaytypename":"购物"},
+          {"bigpaytypeid":"4","bigpaytypename":"娱乐"},
+          {"bigpaytypeid":"5","bigpaytypename":"投资"},
+          {"bigpaytypeid":"6","bigpaytypename":"医教"},
+          {"bigpaytypeid":"7","bigpaytypename":"居家"},
+          {"bigpaytypeid":"8","bigpaytypename":"人情"},
+          {"bigpaytypeid":"9","bigpaytypename":"生意"}];*/
+          showDataList("payTypeContent",bigtype,type_pay);
+        }
+        wrapperRaise("itemPayWrapper");
+        isPayFirst = false;
+        initSwiper('swiperPayType');
+      }
+      function saveDetail(id,flag){
+        var inPayTypeIdVal = $($("#"+id).find("input")[1]).attr("data-value");
+        var data = getFormVal(id);
+       ///////////////////////  memberaccount为当前用户 需改  ///////////////////////////////
+        if(id=='inForm'){
+          data["detailszclassify"] = 1;
+          data["incometypeid"] = inPayTypeIdVal;
+          data["paytypeid"] = "";
+        }else{
+          data["detailszclassify"] = 0;
+          data["paytypeid"] = inPayTypeIdVal;
+          data["incometypeid"] = "";
+        }
+        var isTrue = postData("saveDetail",data);
+        if(isTrue){
+          mesShow("保存成功","success",600);
+        }
+        setTimeout(function(){
+          if(flag=="jump"){
+            window.history.go(-1);
+          }
+        },100);
+        playBtnClick();
+      }
+      function saveDetailWrite(id){
+        saveDetail(id);
+        $($("#"+id).find("input")[0]).val("0.00");
+        $($("#"+id).find("input")[3]).val("");
+        $($("#"+id).find("input")[5]).val("");
+        playBtnClick();
+      }
+      function showIncomeType(){
+        if(isIncomeFirst){
+          var data = postData("showIncomeType");
+          showDataList("incomeTypeContent",data,type_income);
+        }
+        wrapperRaise("itemIncomeWrapper");
+        isIncomeFirst = false;
+        initSwiper('swiperIncomeType');
+      }
+      function showInConsume(){
+        if(isInConsumeFirst){
+          var consume = postData("showInConsume");
+        //  var consume = [{"consumeszclassify":"0","consumename":"自己","consumeid":"2"},{"consumeszclassify":"0","consumename":"配偶","consumeid":"4"},{"consumeszclassify":"0","consumename":"孩子","consumeid":"6"},{"consumeszclassify":"0","consumename":"父母","consumeid":"8"},{"consumeszclassify":"0","consumename":"爷爷奶奶","consumeid":"10"},{"consumeszclassify":"0","consumename":"亲戚","consumeid":"11"},{"consumeszclassify":"0","consumename":"朋友","consumeid":"12"},{"consumeszclassify":"0","consumename":"家庭公用","consumeid":"13"}];
+          showDataList("inConsumeContent",consume,type_inConsume);
+        }
+        wrapperRaise("consumeInWrapper");
+        isInConsumeFirst = false;
+        initSwiper('swiperInConsume');
+      }
+      function showPayConsume(){
+        if(isPayConsumeFirst){
+          var consume = postData("showPayConsume");
+          showDataList("payConsumeContent",consume,type_payConsume);
+        }
+        wrapperRaise("consumePayWrapper");
+        isPayConsumeFirst = false;
+        initSwiper('swiperPayConsume');
+      }
+    </script>
+  </body>
+</html>

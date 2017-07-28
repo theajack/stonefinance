@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zh-Hans" class="bg-white" >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="HandheldFriendly" content="true">
+    <meta http-equiv="Cache-Control" content="no-siteapp" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no, email=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-tap-highlight" content="no">
+    <title></title>
+    <link rel="stylesheet" href="css/style.css?v=1">
+    <link rel="stylesheet" href="css/base.min.css">
+    <link rel="stylesheet" href="css/plugin.min.css">
+  </head>
+  <body class="bg-white">
+    <div class="head-wrapper">
+      <a href="land.html">
+        <span class="glyphicon glyphicon-chevron-left return-logo"></span>
+      </a>
+      <div class="head-inside div-center text-center">
+        <img src="images/logo3.png" class="height-full vertical-textbottom"/>
+        <span class="page-title">找回密码</span>
+      </div>
+    </div>
+    <div class="mark-text">请在下面输入您要找回的账号：</div>
+    <div class="land-wrapper clearfix border-top-ddd">
+      <div class="land-logo">
+        <img src="images/account.png" class="land-img"/>
+      </div>      
+      <input type="text" class="land-text" id="account" placeholder="手机/账号/邮箱"/>
+    </div>
+    <div class="display-none" id="findPW">
+      <div class="mark-text">请回答您设置的问题：</div>
+      <div class="land-wrapper clearfix">
+        <div class="land-logo">
+          <img src="images/question.png" class="land-img"/>
+        </div>      
+        <input type="text" class="land-text" id="questionArea" disabled="disabled" value="谁是小猴子？"/>
+      </div>
+      <div class="land-wrapper clearfix">
+        <div class="land-logo">
+          <img src="images/answer.png" class="land-img"/>
+        </div>
+        <input type="text" class="land-text" placeholder="请填写答案"/>
+      </div>
+    </div>
+    <div class="edit-button mt-xlg" onClick="showFindPW(this)">下一步</div>
+    <script src="js/plugin.min.js"></script>
+    <script src="js/common.js"></script>
+    <script type="text/javascript">
+    function showFindPW(obj){
+      var account = $("#account").val();
+      if(account==""){
+        mesShow("账号不能为空","warn");
+      }else{
+        if(account!="shiyaping"){
+          mesShow("此账号不存在","error");
+        }else{
+          var $obj = $(obj);
+          $("#findPW").slideDown("slow");
+          $obj.text("提交");
+        }
+      }
+    }
+    </script>
+  </body>
+</html>

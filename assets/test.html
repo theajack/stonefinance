@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="zh-Hans" class="all-wrapper">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="HandheldFriendly" content="true">
+    <meta http-equiv="Cache-Control" content="no-siteapp" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no, email=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-tap-highlight" content="no">
+    <title></title>
+    <link rel="stylesheet" href="css/style.css?v=1">
+    <link rel="stylesheet" href="css/base.min.css">
+    <link rel="stylesheet" href="css/plugin.min.css">
+  </head>
+  <body class="bg-white">
+    <div class="head-wrapper">
+      <a href="index.html">
+        <span class="glyphicon glyphicon-chevron-left return-logo"></span>
+      </a>
+      <div class="head-inside div-center text-center">
+        <img src="images/logo3.png" class="height-full"/>
+        <span class="page-title">搜索条件</span>
+      </div>
+      <span class="glyphicon glyphicon-ok tick-mark"></span>
+    </div>
+    <form id="searchForm">
+      <div class="land-wrapper clearfix">
+        <div class="land-logo">
+          <span class="glyphicon glyphicon-th-list boot-font"></span>
+        </div>      
+        <input type="text" class="land-text sz-focus" value="支出" data-name="paytypeid" readonly="true" id="searchTypeText" placeholder="搜索类型" onClick="showSearchType()"/>
+      </div>
+      <div class="land-wrapper clearfix">
+        <div class="land-logo">
+          <span class="glyphicon glyphicon-th-list boot-font"></span>
+        </div>      
+        <input type="text" class="land-text sz-focus" value="" data-name="paytypeid" readonly="true" id="payType" placeholder="时间搜索" onClick="showSZType('pay')"/>
+      </div>
+      <div class="land-wrapper clearfix">
+        <div class="land-logo">
+          <span class="glyphicon glyphicon-th-list boot-font"></span>
+        </div>      
+        <input type="text" class="land-text sz-focus" value="" data-name="paytypeid" readonly="true" id="searchUser" placeholder="用户搜索" onClick="changUser()"/>
+      </div>
+    </form>
+    
+    <div class="sztype-content display-none" id="searchType">
+      <div class="content-wrapper">
+        <div class="content-head">搜索类型</div>
+        <span class="glyphicon glyphicon-remove close-btn" onClick="closePage(this)"></span>
+        <div class="one-detail pl-md pt-sm" onClick="changeSearch(this)">
+          <span class="detail-bar bg-theme"></span>支出   
+        </div>
+        <div class="one-detail pl-md pt-sm" onClick="changeSearch(this)">
+          <span class="detail-bar bg-green" ></span>收入   
+        </div>
+        <div class="one-detail pl-md pt-sm" onClick="changeSearch(this)">
+          <span class="detail-bar bg-orange" ></span>预算   
+        </div>
+      </div>
+    </div>
+    
+    <div class="sztype-content display-none" id="consumeWrapper" data-aim="searchUser">
+      <div class="content-wrapper">
+        <div class="content-head">消费成员</div>
+        <span class="glyphicon glyphicon-remove close-btn" onClick="closePage(this)"></span>
+        <div class="swiper-container" id="swiperConsume">
+          <div class="swiper-wrapper width-full">
+            <div class="swiper-slide width-full">
+              <div id="consumeContent" class="width-full">
+
+              </div>
+            </div>
+          </div>  
+        </div>
+      </div>
+    </div>
+    <script src="js/plugin.min.js"></script>
+    <script src="js/common.js"></script>
+    <script type="text/javascript">
+      var consume = [
+        {"consumeName":"自己"},
+        {"consumeName":"配偶"},
+        {"consumeName":"孩子"},
+        {"consumeName":"父母"},
+        {"consumeName":"爷爷奶奶"},
+        {"consumeName":"亲戚"},
+        {"consumeName":"朋友"},
+        {"consumeName":"家庭公用"},
+      ];
+      $(function(){
+        var typeHeight = winHeight*0.86 - 36;
+        $("#swiperConsume").css("height",typeHeight+"px");
+        showDataList("consumeContent",consume,type_cosume);
+      }); 
+      function showSearchType(){
+        wrapperRaise("searchType");
+      }
+      function changeSearch(obj){
+        var searchType = $(obj).text().replace(/^\s*/,'');
+        $("#searchTypeText").val(searchType);
+        closePage();
+      }
+      function changUser(){
+        wrapperRaise("consumeWrapper");
+        initSwiper('swiperConsume');
+      }
+    </script>
+  </body>
+</html>

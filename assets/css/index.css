@@ -1,0 +1,28 @@
+#footer{
+  height:60px;
+  border-top:1px solid #ddd;
+  width:100%;
+  max-width: 650px;
+  z-index: 100;
+  background-color:#fff;
+  bottom:0;
+  position:fixed;
+  border-top:1px solid #bbb;
+}
+.footer-item{
+  width:25%;
+  height:100%;
+  float:left;
+  background-color:#ddd;
+}
+.footer-content{
+  width:60px;
+}
+.footer-content img{
+  width:30px;
+  margin-bottom:2px;
+}
+.footer-text{
+  font-size:13px;
+  line-height:25px;
+}

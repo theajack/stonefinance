@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-Hans" class="bg-white" >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="HandheldFriendly" content="true">
+    <meta http-equiv="Cache-Control" content="no-siteapp" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no, email=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-tap-highlight" content="no">
+    <title></title>
+    <link rel="stylesheet" href="css/style.css?v=1">
+    <link rel="stylesheet" href="css/base.min.css">
+    <link rel="stylesheet" href="css/plugin.min.css">
+  </head>
+  <body class="bg-white">
+    <div>
+      <div class="return-arrow">
+        
+      </div>
+      <div class="user-head">
+        <img src="images/user-photo.png" alt="" class="center-photo"/>
+      </div>
+      <div class="mt-md">
+        <label class="common-lable" for="memberAccount">
+        <span>账号</span>
+        <span class="notice-mark">*</span>：</label>
+        <input class="common-input" type="text" name="memberaccount" id="memberAccount" placeholder="账号" disabled="disabled"/>
+      </div>
+      <div class="mt-md">
+        <label class="common-lable" for="passWord">
+        <span>密码</span>
+        <span class="notice-mark">*</span>：</label>
+        <input class="common-input" type="text" name="password" id="passWord" placeholder="密码" disabled="disabled"/>
+      </div>
+      <div class="mt-md">
+        <label class="common-lable" for="memberName">
+        <span>真实姓名</span>
+        ：</label>
+        <input class="common-input" type="text" name="membername" id="memberName" placeholder="真实姓名" disabled="disabled"/>
+      </div>
+      <div class="mt-md">
+        <label class="common-lable" for="memberAge">
+        <span>年龄</span>
+        <span class="notice-mark">*</span>：</label>
+        <input class="common-input" type="text" name="memberage" id="memberAge" placeholder="年龄" disabled="disabled"/>
+      </div>
+      <div class="mt-md">
+        <label class="common-lable" for="memberBir">
+        <span>出生年月</span>
+        <span class="notice-mark">*</span>：</label>
+        <input class="common-input" type="text" name="memberbir" id="memberBir" placeholder="出生年月" disabled="disabled"/>
+      </div>
+      <div class="mt-md">
+        <label class="common-lable">
+          <span>性别</span>
+        ：</label>
+        <span class="ml-lg">
+          <label class="sex-select" for="female">女</label>
+          <input class="radio-select" type="radio" name="sex" id="female"/>
+          <label class="sex-select" for="male">男</label>
+          <input class="radio-select" type="radio" name="sex" id="male"/>
+        </span>
+      </div>
+      <div class="mt-md">
+        <label class="common-lable" for="memberTele">
+        <span>联系方式</span>
+        ：</label>
+        <input class="common-input" type="text" name="membertele" id="memberTele" placeholder="联系方式" disabled="disabled"/>
+      </div>
+      <div class="mt-md mb-md">
+        <label class="common-lable" for="memberAddress">
+        <span>住址</span>
+        ：</label>
+        <input class="common-input" type="text" name="memberaddress" id="memberAddress" placeholder="住址" disabled="disabled"/>
+      </div>
+      <div class="edit-button" id="editBtn" onclick="editInfo()">编辑</div>
+      <div class="edit-button display-none" id="finishBtn">完成</div>
+    </div>
+    <script src="js/plugin.min.js"></script>
+    <script src="js/common.js"></script>
+    <script type="text/javascript">
+      function editInfo(){
+        $(".common-input").removeAttr("disabled").addClass("bg-eee");
+        $("#editBtn").addClass("display-none");
+        $("#finishBtn").removeClass("display-none");
+        }
+    </script>
+  </body>
+</html>
